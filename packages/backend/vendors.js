@@ -51,7 +51,7 @@ app.delete('/vendors/:id', (req,res) => {
     const vendorID = parseInt(req.params.id);
     const index = vendors.findIndex((v) => v.id ===vendorID);
 
-    if (index 1== -1 {
+    if (index !== -1) {
         const deletedVendor = vendors.splice(index,1);
         res.json(deletedVendor[0]);
     } else {
