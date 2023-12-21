@@ -1,5 +1,5 @@
 import React from 'react';
-import VendorComponent from './VendorComponent';
+import vendorComponent from './vendorComponent';
 
 const VendorPage = () => {
   return (
@@ -10,4 +10,4 @@ const VendorPage = () => {
   );
 };
 
-export default VendorPage;
+export default vendorPage;
