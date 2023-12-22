@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const VendorComponent = () => {
+const vendorComponent = () => {
   const [vendors, setVendors] = useState([]);
   const [newVendor, setNewVendor] = useState({
     name: '',
@@ -101,4 +101,4 @@ const VendorComponent = () => {
   );
 };
 
-export default VendorComponent;
+export default vendorComponent;
