@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './styleTemplate.css'; 
 
 const guestComponent = () => {
   const [guests, setGuests] = useState([]);
