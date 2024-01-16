@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styleTemplate.css'; 
+import '/styleTemplate.css'; 
 
 const vendorComponent = () => {
   const [vendors, setVendors] = useState([]);
@@ -13,7 +13,7 @@ const vendorComponent = () => {
 
   const fetchVendors = async () => {
     try {
-      const response = await fetch('http://localhost:3000/vendors');
+      const response = await fetch('http://localhost:5000/vendors');
       const data = await response.json();
       setVendors(data);
     } catch (error) {
@@ -32,7 +32,7 @@ const vendorComponent = () => {
 
   const handleCreateVendor = async () => {
     try {
-      const response = await fetch('http://localhost:3000/vendors', {
+      const response = await fetch('http://localhost:5000/vendors', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
