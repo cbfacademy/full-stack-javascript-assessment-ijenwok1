@@ -1,18 +1,8 @@
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import App from "./App";
-import VendorPage from "./vendorPage";
-import GuestPage from "./guestPage";
+import {Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <>
-    <Routes>
-      <Route path="/" element={<App/>} />
-      <Route path="vendor" element={<VendorPage/>} />
-      <Route path="guest" element={<GuestPage/>} />
-     </Routes>
-<div>
 <header className="navbar">
   <nav>
     <ul>
@@ -22,9 +12,7 @@ function Navbar() {
     </ul>
   </nav>    
   </header>
-
-</div>
-</>
 );
-  }
+}
+
 export default Navbar;
