@@ -1,5 +1,5 @@
 import React from 'react';
-import guestComponent from './guestComponent';
+import GuestComponent from './guestComponent';
 
 const GuestPage = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styleTemplate.css'; 
 
-const guestComponent = () => {
+const GuestComponent = () => {
   const [guests, setGuests] = useState([]);
   const [newGuest, setNewGuest] = useState({
     name: '',
@@ -12,7 +12,7 @@ const guestComponent = () => {
 
   const fetchGuests = async () => {
     try {
-      const response = await fetch('http://localhost:3000/guests');
+      const response = await fetch('http://localhost:5000/api/guests');
       const data = await response.json();
       setGuests(data);
     } catch (error) {
@@ -31,7 +31,7 @@ const guestComponent = () => {
 
   const handleCreateGuest = async () => {
     try {
-      const response = await fetch('http://localhost:3000/guests', {
+      const response = await fetch('http://localhost:5000/api/guests', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const guestComponent = () => {
         ))}
       </ul>
 
-      <h2>Create Guest</h2>
+      <h2>Add a Guest</h2>
       <form>
         <label>
           Name:
@@ -95,4 +95,4 @@ const guestComponent = () => {
   );
 };
 
-export default vendorGuest;
+export default GuestComponent;

@@ -1,30 +1,27 @@
-// guestListService.js
-
 const express = require('express');
-const bodyParser = require('body-parser');
+const app = express.Router()
 
-const app = express();
-const PORT = 3000;
-
-// In-memory data store for the guest list
-let guests = [];
-
-app.use(bodyParser.json());
-
+function guestsRoutes(mongodb)
+{
 // Create a new guest
-app.post('/guests', (req, res) => {
+app.post('/', (req, res) => {
   const newGuest = { id: guests.length + 1, ...req.body };
   guests.push(newGuest);
   res.status(201).json(newGuest);
 });
 
 // Get all guests
-app.get('/guests', (req, res) => {
-  res.json(guests);
+app.get('/', async(req,res) => {
+  try {
+      const guests = await mongodb.db('WeddingPlan').collection('Guestlist').find().toArray();
+      res.status(200).json(guests)
+      }catch(err) {
+       console.log({err})
+      }
 });
 
 // Get a guest by ID
-app.get('/guests/:id', (req, res) => {
+app.get('/:id', (req, res) => {
   const guestId = parseInt(req.params.id);
   const guest = guests.find((g) => g.id === guestId);
 
@@ -36,7 +33,7 @@ app.get('/guests/:id', (req, res) => {
 });
 
 // Update a guest by ID
-app.put('/guests/:id', (req, res) => {
+app.put('/:id', (req, res) => {
   const guestId = parseInt(req.params.id);
   const index = guests.findIndex((g) => g.id === guestId);
 
@@ -49,7 +46,7 @@ app.put('/guests/:id', (req, res) => {
 });
 
 // Delete a guest by ID
-app.delete('/guests/:id', (req, res) => {
+app.delete('/:id', (req, res) => {
   const guestId = parseInt(req.params.id);
   const index = guests.findIndex((g) => g.id === guestId);
 
@@ -61,7 +58,7 @@ app.delete('/guests/:id', (req, res) => {
   }
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+return app 
+}
+
+module.exports = guestsRoutes;

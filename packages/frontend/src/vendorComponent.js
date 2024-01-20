@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styleTemplate.css'; 
 
-const vendorComponent = () => {
+const VendorComponent = () => {
   const [vendors, setVendors] = useState([]);
   const [newVendor, setNewVendor] = useState({
     name: '',
@@ -13,7 +13,7 @@ const vendorComponent = () => {
 
   const fetchVendors = async () => {
     try {
-      const response = await fetch('http://localhost:5000/vendors');
+      const response = await fetch('http://localhost:5000/api/vendors');
       const data = await response.json();
       setVendors(data);
     } catch (error) {
@@ -32,7 +32,7 @@ const vendorComponent = () => {
 
   const handleCreateVendor = async () => {
     try {
-      const response = await fetch('http://localhost:5000/vendors', {
+      const response = await fetch('http://localhost:5000/api/vendors', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,4 +102,4 @@ const vendorComponent = () => {
   );
 };
 
-export default vendorComponent;
+export default VendorComponent;
