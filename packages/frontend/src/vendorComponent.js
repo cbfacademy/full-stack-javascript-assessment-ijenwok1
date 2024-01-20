@@ -63,7 +63,7 @@ const VendorComponent = () => {
       <h2>Vendors</h2>
       <ul>
         {vendors.map((vendor) => (
-          <li key={vendor.id}>{vendor.name}</li>
+          <p key={vendor.id}>{vendor.name}</p>
         ))}
       </ul>
 
