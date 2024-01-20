@@ -61,7 +61,7 @@ const GuestComponent = () => {
       <h2>Guests</h2>
       <ul>
         {guests.map((guest) => (
-          <li key={guest.id}>{guest.name}</li>
+          <p key={guest.id}>{guest.name}</p>
         ))}
       </ul>
 
