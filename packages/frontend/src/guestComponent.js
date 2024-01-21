@@ -20,7 +20,6 @@ const GuestComponent = () => {
       console.error('Error fetching guests:', error);
     }
   };
-
   useEffect(() => {
     fetchGuests();
   }, []);
@@ -30,7 +29,8 @@ const GuestComponent = () => {
     setNewGuest((prevGuest) => ({ ...prevGuest, [name]: value }));
   };
 
-  const handleCreateGuest = async () => {
+   const handleCreateGuest = async () => {
+   console.log(newGuest)
     try {
       const response = await fetch('http://localhost:5000/api/guests', {
         method: 'POST',
@@ -42,6 +42,8 @@ const GuestComponent = () => {
 
       if (response.ok) {
         const createdGuest = await response.json();
+        console.log(createdGuest) 
+        console.log([...guests, createdGuest])
         setGuests((prevGuests) => [...prevGuests, createdGuest]);
         setNewGuest({
           name: '',
@@ -58,6 +60,7 @@ const GuestComponent = () => {
   };
 
   const handleUpdateGuest = async (id) => {
+    console.log(id)
     try {
       const response = await fetch(`http://localhost:5000/api/guests/${id}`, {
         method: 'PUT',
@@ -69,8 +72,9 @@ const GuestComponent = () => {
 
       if (response.ok) {
         const updatedGuest = await response.json();
+        console.log(updatedGuest)
         setGuests((prevGuests) =>
-          prevGuests.map((guest) => (guest.id === id ? updatedGuest : guest))
+          prevGuests.map((guest) => (guest._id === id ? updatedGuest : guest))
         );
         setNewGuest({
           name: '',
@@ -93,7 +97,7 @@ const GuestComponent = () => {
       });
 
       if (response.ok) {
-        setGuests((prevGuests) => prevGuests.filter((guest) => guest.id !== id));
+        setGuests((prevGuests) => prevGuests.filter((guest) => guest._id !== id));
       } else {
         console.error('Failed to delete guest:', response.statusText);
       }
@@ -117,22 +121,22 @@ const GuestComponent = () => {
       />
       <ul>
         {filteredGuests.map((guest) => (
-          <div key={guest.id}>
+          <div key={guest._id}>
             <p>{guest.name} - {guest.rsvp}</p>
             <button
               onClick={() => {
                 setNewGuest({
                   name: guest.name,
                   email: guest.email,
-                  phoneNumber: guest.phoneNumber,
+                  phoneNumber: guest.phonenumber,
                   rsvp: guest.rsvp,
-                  id: guest.id, // Set the guest id for updating
+                  _id: guest._id, // Set the guest id for updating
                 });
               }}
             >
               Edit
             </button>
-            <button onClick={() => handleDeleteGuest(guest.id)}>Delete</button>
+            <button onClick={() => handleDeleteGuest(guest._id)}>Delete</button>
           </div>
         ))}
       </ul>
@@ -167,10 +171,11 @@ const GuestComponent = () => {
         <button
           type="button"
           onClick={() => {
-            newGuest.id ? handleUpdateGuest(newGuest.id) : handleCreateGuest();
+            console.log(newGuest)
+            newGuest._id ? handleUpdateGuest(newGuest._id) : handleCreateGuest();
           }}
         >
-          {newGuest.id ? 'Update' : 'Add'} Guest
+          {newGuest._id ? 'Update' : 'Add'} Guest
         </button>
       </form>
     </div>

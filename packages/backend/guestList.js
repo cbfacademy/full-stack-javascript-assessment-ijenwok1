@@ -1,13 +1,17 @@
 const express = require('express');
+const { ObjectId } = require('mongodb');
 const app = express.Router()
 
 function guestsRoutes(mongodb)
 {
 // Create a new guest
-app.post('/', (req, res) => {
-  const newGuest = { id: guests.length + 1, ...req.body };
-  guests.push(newGuest);
-  res.status(201).json(newGuest);
+app.post('/', async(req, res) => {
+  try{ 
+   const newGuest = await mongodb.db('WeddingPlan').collection('Guestlist').insertOne(req.body);
+  res.status(201).json(req.body);
+  }catch(err){
+    console.log({err})
+  }
 });
 
 // Get all guests
@@ -17,6 +21,7 @@ app.get('/', async(req,res) => {
       res.status(200).json(guests)
       }catch(err) {
        console.log({err})
+       res.status(404).json({ error: 'Cannot find all guests' });
       }
 });
 
@@ -32,30 +37,39 @@ app.get('/:id', (req, res) => {
   }
 });
 
-// Update a guest by ID
-app.put('/:id', (req, res) => {
-  const guestId = parseInt(req.params.id);
-  const index = guests.findIndex((g) => g.id === guestId);
+// Update a guest by name text
+app.put('/:id', async (req, res) => {
+  try{
+    const guestId = req.params.id;
+    console.log(req.body, guestId)
+    const {name, email, rsvp} = req.body
+  const result = await mongodb.db('WeddingPlan').collection('Guestlist').findOneAndUpdate(
+    { _id:guestId },
+    { $set: {name, email, rsvp} },
+    { returnDocument: 'after'},
 
-  if (index !== -1) {
-    guests[index] = { ...guests[index], ...req.body };
-    res.json(guests[index]);
-  } else {
-    res.status(404).json({ error: 'Guest not found' });
-  }
+  ); 
+  res.status(201).json(result)
+  }catch(err){
+    
+    console.log({err})
+  res.status(404).json({ error: 'Guest not found' });
+}
 });
 
-// Delete a guest by ID
-app.delete('/:id', (req, res) => {
-  const guestId = parseInt(req.params.id);
-  const index = guests.findIndex((g) => g.id === guestId);
-
-  if (index !== -1) {
-    const deletedGuest = guests.splice(index, 1);
-    res.json(deletedGuest[0]);
-  } else {
-    res.status(404).json({ error: 'Guest not found' });
-  }
+// Delete a guest by ID test
+app.delete('/:id', async (req, res) => {
+  try{
+  const guestId = req.params.id;
+  const result = await mongodb.db('WeddingPlan').collection('Guestlist').findOneAndDelete(
+    { _id:new ObjectId(guestId)}
+           ); 
+           console.log("Guest deleted", guestId)
+  res.status(201).json(result)
+  }catch(err){
+    console.log({err})
+  res.status(404).json({ error: 'Guest not found' });
+}
 });
 
 return app 
