@@ -20,6 +20,7 @@ const GuestComponent = () => {
       console.error('Error fetching guests:', error);
     }
   };
+
   useEffect(() => {
     fetchGuests();
   }, []);
@@ -29,8 +30,8 @@ const GuestComponent = () => {
     setNewGuest((prevGuest) => ({ ...prevGuest, [name]: value }));
   };
 
-   const handleCreateGuest = async () => {
-   console.log(newGuest)
+  const handleCreateGuest = async () => {
+    console.log(newGuest);
     try {
       const response = await fetch('http://localhost:5000/api/guests', {
         method: 'POST',
@@ -42,8 +43,8 @@ const GuestComponent = () => {
 
       if (response.ok) {
         const createdGuest = await response.json();
-        console.log(createdGuest) 
-        console.log([...guests, createdGuest])
+        console.log(createdGuest);
+        console.log([...guests, createdGuest]);
         setGuests((prevGuests) => [...prevGuests, createdGuest]);
         setNewGuest({
           name: '',
@@ -60,7 +61,7 @@ const GuestComponent = () => {
   };
 
   const handleUpdateGuest = async (id) => {
-    console.log(id)
+    console.log(id);
     try {
       const response = await fetch(`http://localhost:5000/api/guests/${id}`, {
         method: 'PUT',
@@ -72,7 +73,7 @@ const GuestComponent = () => {
 
       if (response.ok) {
         const updatedGuest = await response.json();
-        console.log(updatedGuest)
+        console.log(updatedGuest);
         setGuests((prevGuests) =>
           prevGuests.map((guest) => (guest._id === id ? updatedGuest : guest))
         );
@@ -112,20 +113,64 @@ const GuestComponent = () => {
 
   return (
     <div>
-      
+      <h2>{newGuest.id ? 'Update' : 'Add'} a Guest</h2>
+      <div className="form-container">
+        <form>
+          <label>
+            Name:
+            <input type="text" name="name" value={newGuest.name} onChange={handleInputChange} className="form-input" />
+          </label>
+          <br />
+          <label>
+            Email:
+            <input type="text" name="email" value={newGuest.email} onChange={handleInputChange} className="form-input" />
+          </label>
+          <br />
+          <label>
+            Phone Number:
+            <input
+              type="text"
+              name="phoneNumber"
+              value={newGuest.phoneNumber}
+              onChange={handleInputChange}
+              className="form-input"
+            />
+          </label>
+          <br />
+          <label>
+            RSVP:
+            <input type="text" name="rsvp" value={newGuest.rsvp} onChange={handleInputChange} className="form-input" />
+          </label>
+          <br />
+          <button
+            className="form-button"
+            type="button"
+            onClick={() => {
+              console.log(newGuest);
+              newGuest._id ? handleUpdateGuest(newGuest._id) : handleCreateGuest();
+            }}
+          >
+            {newGuest._id ? 'Update' : 'Add'} Guest
+          </button>
+        </form>
+      </div>
+
       <div className="search-container">
-      <input
-        type="text"
-        placeholder="Search by name..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-input"
-         />
-         </div>
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </div>
+
       <ul>
         {filteredGuests.map((guest) => (
           <div key={guest._id}>
-            <p>{guest.name} - {guest.rsvp}</p>
+            <p>
+              {guest.name} - {guest.rsvp}
+            </p>
             <button
               onClick={() => {
                 setNewGuest({
@@ -133,7 +178,7 @@ const GuestComponent = () => {
                   email: guest.email,
                   phoneNumber: guest.phonenumber,
                   rsvp: guest.rsvp,
-                  _id: guest._id, 
+                  _id: guest._id,
                 });
               }}
             >
@@ -143,44 +188,6 @@ const GuestComponent = () => {
           </div>
         ))}
       </ul>
-
-      <h2>{newGuest.id ? 'Update' : 'Add'} a Guest</h2>
-      <form>
-        <label>
-          Name:
-          <input type="text" name="name" value={newGuest.name} onChange={handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input type="text" name="email" value={newGuest.email} onChange={handleInputChange} />
-        </label>
-        <br />
-        <label>
-          Phone Number:
-          <input
-            type="text"
-            name="phoneNumber"
-            value={newGuest.phoneNumber}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          RSVP:
-          <input type="text" name="rsvp" value={newGuest.rsvp} onChange={handleInputChange} />
-        </label>
-        <br />
-        <button
-          type="button"
-          onClick={() => {
-            console.log(newGuest)
-            newGuest._id ? handleUpdateGuest(newGuest._id) : handleCreateGuest();
-          }}
-        >
-          {newGuest._id ? 'Update' : 'Add'} Guest
-        </button>
-      </form>
     </div>
   );
 };
