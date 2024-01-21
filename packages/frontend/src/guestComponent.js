@@ -112,13 +112,16 @@ const GuestComponent = () => {
 
   return (
     <div>
-      <h2>Guests</h2>
+      
+      <div className="search-container">
       <input
         type="text"
         placeholder="Search by name..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-      />
+        className="search-input"
+         />
+         </div>
       <ul>
         {filteredGuests.map((guest) => (
           <div key={guest._id}>
@@ -130,7 +133,7 @@ const GuestComponent = () => {
                   email: guest.email,
                   phoneNumber: guest.phonenumber,
                   rsvp: guest.rsvp,
-                  _id: guest._id, // Set the guest id for updating
+                  _id: guest._id, 
                 });
               }}
             >
