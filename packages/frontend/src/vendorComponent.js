@@ -4,6 +4,7 @@ import './styleTemplate.css';
 const VendorComponent = () => {
   const [vendors, setVendors] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedVendor, setSelectedVendor] = useState(null);
 
   const fetchVendors = async () => {
     try {
@@ -20,9 +21,12 @@ const VendorComponent = () => {
   }, []);
 
   const filteredVendors = vendors.filter((vendor) =>
-  vendor.service.toLowerCase().includes(searchTerm.toLowerCase())
-);
+    vendor.service.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
+  const handleVendorClick = (vendor) => {
+    setSelectedVendor(vendor);
+  };
 
   return (
     <div>
@@ -34,11 +38,30 @@ const VendorComponent = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+
       <ul>
         {filteredVendors.map((vendor) => (
-          <p key={vendor.id}>{vendor.name} - {vendor.service}</p>
-        ))}
-      </ul>
+          <p key={vendor.id} onClick={() => handleVendorClick(vendor)}
+          style={{
+            cursor: 'pointer',
+            color: selectedVendor === vendor ? 'red' : 'white',
+          }}
+        >
+          {vendor.name} - {vendor.service}
+        </p>
+      ))}
+    </ul>
+
+      {selectedVendor && (
+        <div>
+          <h3>Details for {selectedVendor.name}</h3>
+          <p>Service: {selectedVendor.service}</p>
+          <p>Location: {selectedVendor.location}</p>
+          <p>Contact: {selectedVendor.contact}</p>
+          <p>Description: {selectedVendor.description}</p>
+
+        </div>
+      )}
     </div>
   );
 };
