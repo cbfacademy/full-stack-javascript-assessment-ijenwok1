@@ -37,7 +37,7 @@ const Home = ()=> <div className="App">
 <div className="content">
 <h1 className="heading">WELCOME TO</h1>
 <p className="paragraph">My Wedding Day</p>
-<a href="/vendorPage.js" className="cta-button">LEARN MORE</a>      
+<a href="/about.js" className="cta-button">LEARN MORE</a>      
 </div>
 </div>
 export default App;
