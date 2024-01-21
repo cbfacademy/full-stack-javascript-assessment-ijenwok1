@@ -4,6 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import VendorPage from "./vendorPage";
 import GuestPage from "./guestPage";
+import About from "./about";
 
 
 function App() {
@@ -14,10 +15,7 @@ function App() {
       <Route index element={<Home />} />
       <Route path="vendor" element={<VendorPage />} />
       <Route path="guest" element={<GuestPage/>} />
-
-      {/* Using path="*"" means "match anything", so this route
-            acts like a catch-all for URLs that we don't have explicit
-  routes for.*/ }
+      <Route path="about" element={<About />} />
       <Route path="*" element={<NoMatch />} />
     </Routes>
     </>
@@ -37,7 +35,7 @@ const Home = ()=> <div className="App">
 <div className="content">
 <h1 className="heading">WELCOME TO</h1>
 <p className="paragraph">My Wedding Day</p>
-<a href="/about.js" className="cta-button">LEARN MORE</a>      
+<Link to ="/about" className="cta-button">LEARN MORE</Link>      
 </div>
 </div>
 export default App;
