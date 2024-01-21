@@ -29,28 +29,31 @@ const VendorComponent = () => {
   };
 
   return (
-    <div>
-      <h2>Vendors</h2>
+    <div className="vendor-container">
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search by service..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Search by service..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-
-      <ul>
+      <ul className="vendor-list">
         {filteredVendors.map((vendor) => (
-          <p key={vendor.id} onClick={() => handleVendorClick(vendor)}
-          style={{
-            cursor: 'pointer',
-            color: selectedVendor === vendor ? 'red' : 'white',
-          }}
-        >
-          {vendor.name} - {vendor.service}
-        </p>
-      ))}
-    </ul>
+          <p
+            key={vendor.id}
+            onClick={() => handleVendorClick(vendor)}
+            style={{
+              cursor: 'pointer',
+              color: selectedVendor === vendor ? 'red' : 'white',
+            }}
+          >
+            {vendor.name} - {vendor.service}
+          </p>
+        ))}
+      </ul>
 
       {selectedVendor && (
         <div>
@@ -59,7 +62,6 @@ const VendorComponent = () => {
           <p>Location: {selectedVendor.location}</p>
           <p>Contact: {selectedVendor.contact}</p>
           <p>Description: {selectedVendor.description}</p>
-
         </div>
       )}
     </div>

@@ -4,7 +4,7 @@ import GuestComponent from './guestComponent';
 const GuestPage = () => {
   return (
     <div>
-      <h1>Guest Page</h1>
+      <h1>Guests</h1>
       <GuestComponent />
     </div>
   );

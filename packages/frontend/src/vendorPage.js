@@ -4,7 +4,7 @@ import VendorComponent from './vendorComponent';
 const VendorPage = () => {
   return (
     <div>
-      <h1> The Vendor Page</h1>
+      <h1> Vendors </h1>
       <VendorComponent />
     </div>
   );

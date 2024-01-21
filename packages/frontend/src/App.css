@@ -10,6 +10,24 @@
   right: 0;
 }
 
+h1 {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh; 
+}
+
+.search-input {
+  width: 300px; 
+  height: 40px; 
+  font-size: 16px;
+}
+
 nav {
   text-align: right;
 }
