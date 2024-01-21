@@ -118,7 +118,7 @@ const GuestComponent = () => {
       <ul>
         {filteredGuests.map((guest) => (
           <div key={guest.id}>
-            <p>{guest.name}</p>
+            <p>{guest.name} - {guest.rsvp}</p>
             <button
               onClick={() => {
                 setNewGuest({
