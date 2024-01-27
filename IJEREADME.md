@@ -175,4 +175,4 @@ GitHub was used as a repository and for version control, A number of branches we
 
 ## 7. Conclusion
 
-Ije’s Wedding Planning app aims to provide a robust and enjoyable wedding planning experience. Through thoughtful design choices and a commitment to user satisfaction, the app caters to the diverse needs of couples, vendors, and guests involved in the wedding planning process. Continuous improvement and updates are planned to make the app even more valuable for users.
+Ije’s Wedding Plan app aims to provide a robust and enjoyable wedding planning experience. Through thoughtful design choices and a commitment to user satisfaction, the app caters to the diverse needs of couples, vendors, and guests involved in the wedding planning process. Continuous improvement and updates are planned to make the app even more valuable for users.
