@@ -1,10 +1,10 @@
-# Ije’s Wedding App 
+# Ije’s Wedding Plan App 
 
 ## 1. Overview
 
 ### 1.1 Project Description
 
-Ije’s Wedding Planner is a comprehensive wedding app designed to simplify and streamline wedding planning process by providing a one-stop platform for couples. The MVP for the app features a Vendor Directory and a feature to manage a Guest List which results in a cohesive platform to enhance the overall wedding planning experience.
+Ije’s Wedding Plan is a comprehensive wedding app designed to simplify and streamline wedding planning process by providing a one-stop platform for couples. The MVP for the app features a Vendor Directory and a feature to manage a Guest List which results in a cohesive platform to enhance the overall wedding planning experience.
 
 The app can scale to include additional features such as a budget tracker, registry integration and a countdown timer, however due to timing constraints the focus will be on the features that are highly utilised which are the finding a particular vendor and managing the guest list.
 
